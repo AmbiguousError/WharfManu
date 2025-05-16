@@ -35,7 +35,7 @@ GRAVITY_TORQUE_EFFECT = 0.05
 MIN_JUMP_VELOCITY = -4
 GOOD_JUMP_VELOCITY = -8
 MAX_JUMP_VELOCITY = -14 # Max jump height
-FORWARD_PUSH = 2 
+FORWARD_PUSH = 2
 PIKE_SPEED = 3
 MAX_PIKE_ANGLE = 135
 MIN_PIKE_ANGLE = 0
@@ -67,7 +67,7 @@ TIMING_PERFECT_ZONE_WIDTH = 10
 
 # Scoring
 NUM_JUDGES = 5
-ENTRY_WIDTH_PENALTY_FACTOR = 2.0
+# ENTRY_WIDTH_PENALTY_FACTOR = 2.0 # This factor is no longer used in the new scoring.
 MAX_HIGH_SCORES = 3
 
 # Splash Animation
@@ -80,7 +80,7 @@ PARTICLE_MAX_SPEED = 4
 ON_PLATFORM = 0
 PRE_JUMP = 1
 DIVING = 2
-IN_WATER = 3
+IN_WATER = 3 # This state is brief, used for calculations before GAME_OVER
 GAME_OVER = 4
 COMPETITION_OVER = 5
 
@@ -214,8 +214,10 @@ while running:
             head_x = diver_x + head_offset_x; feet_x = diver_x + feet_offset_x; entry_width = abs(head_x - feet_x)
             # Create Splash
             splash_intensity = max(0, min(1, (entry_width / DIVER_HEIGHT))); create_splash(diver_x, WATER_LEVEL, splash_intensity)
-            # Scoring Calculation (Splash Only)
-            judge_scores = []; base_entry_score = max(0, 10 - (entry_width / DIVER_HEIGHT) * 10 * ENTRY_WIDTH_PENALTY_FACTOR)
+            
+            # Scoring Calculation (Splash Only) - MODIFIED FOR BIGGER SPLASH = HIGHER SCORE
+            judge_scores = []; base_entry_score = max(0, min(10, (entry_width / DIVER_HEIGHT) * 10)) 
+            
             for _ in range(NUM_JUDGES): random_factor = random.uniform(-0.5, 0.5); judge_score = max(0, min(10, base_entry_score + random_factor)); judge_scores.append(round(judge_score, 1))
             judge_scores.sort(); judge_scores_display = judge_scores[:]; valid_scores = judge_scores[1:-1] if len(judge_scores) > 2 else judge_scores
             summed_judge_score = sum(valid_scores)
@@ -308,12 +310,15 @@ while running:
         dive_num_display = len(attempt_scores) # Dive number is the index + 1
         draw_text(f"Dive {dive_num_display} Results", font, BLACK, screen, mid_x, res_y, center=True); res_y += 40
         draw_text(f"Somersaults: {somersaults}", score_font, BLACK, screen, mid_x, res_y, center=True); res_y += 30
-        entry_desc = ""; entry_score_base_display = max(0, 10 - (entry_width / DIVER_HEIGHT) * 10 * ENTRY_WIDTH_PENALTY_FACTOR)
-        if entry_score_base_display > 9.0: entry_desc = "Perfect Entry!"
-        elif entry_score_base_display > 7.0: entry_desc = "Good Entry"
-        elif entry_score_base_display > 4.0: entry_desc = "Okay Entry"
-        else: entry_desc = "Big Splash!"
+        
+        # MODIFIED entry_score_base_display and entry_desc logic
+        entry_desc = ""; entry_score_base_display = max(0, min(10, (entry_width / DIVER_HEIGHT) * 10)) # Reflects new scoring: bigger splash = higher score
+        if entry_score_base_display > 9.0: entry_desc = "Epic Splash!"        # e.g., Score 9.01 - 10
+        elif entry_score_base_display > 7.0: entry_desc = "Massive Splash!"   # e.g., Score 7.01 - 9.0
+        elif entry_score_base_display > 4.0: entry_desc = "Good Splash!"      # e.g., Score 4.01 - 7.0
+        else: entry_desc = "Little Splash."                                    # e.g., Score 0 - 4.0
         draw_text(f"Entry: {entry_desc} (Width: {entry_width:.1f})", score_font, BLACK, screen, mid_x, res_y, center=True); res_y += 40
+        
         judge_text = "Judges: ";
         if judge_scores_display: judge_text += " ".join([f"{s:.1f}" for s in judge_scores_display]) + f" (Dropped: {judge_scores_display[0]:.1f}, {judge_scores_display[-1]:.1f})"
         draw_text(judge_text, score_font, BLACK, screen, mid_x, res_y, center=True); res_y += 30
@@ -335,12 +340,10 @@ while running:
              if high_scores:
                  num_scores_to_show = min(len(high_scores), MAX_HIGH_SCORES)
                  for i in range(num_scores_to_show):
-                     score = high_scores[i]
-                     rank_text = f"{i+1}. {score:.2f}"
-                     # Check if the current total score is this high score entry
-                     is_current_score = (i < len(high_scores) and high_scores[i] == total_score and total_score in attempt_scores) # More robust check maybe needed if scores can be identical
+                     score_val = high_scores[i] # Renamed variable to avoid conflict if any
+                     rank_text = f"{i+1}. {score_val:.2f}"
                      # A simpler check: just highlight if the score value matches the last total_score calculated
-                     is_current_score_highlight = (score == total_score)
+                     is_current_score_highlight = (score_val == total_score)
 
                      color = GOLD if is_current_score_highlight else BLACK
                      draw_text(rank_text, score_font, color, screen, mid_x, res_y, center=True)
