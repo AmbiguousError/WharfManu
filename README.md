@@ -4,6 +4,7 @@
 
 ## How to Play
 
+Download https://github.com/AmbiguousError/WharfManu/blob/main/dist/WharfManu.exe
 The game is all about timing your jump and controlling your diver in the air.
 
 ### Controls:
