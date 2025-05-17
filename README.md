@@ -1,6 +1,6 @@
 # WharfManu
 
-**WharfManu** is a simple and fun diving game where the goal is to perform the best "manu" off the wharf! You'll be judged on your entry into the water – aim for the smallest splash. Somersaults will also impress the judges!
+**WharfManu** is a simple and fun diving game where the goal is to perform the best "manu" off the wharf! You'll be judged on your entry into the water – aim for the biggest splash. Somersaults will also impress the judges!
 
 ## How to Play
 
