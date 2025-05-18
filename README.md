@@ -1,10 +1,10 @@
 # WharfManu
 
-**WharfManu** is a simple and fun diving game where the goal is to perform the best "manu" off the wharf! You'll be judged on your entry into the water – aim for the smallest splash. Somersaults will also impress the judges!
+**WharfManu** is a simple and fun diving game where the goal is to perform the best "manu" off the wharf! You'll be judged on your entry into the water – aim for the **BIGGEST splash!** Somersaults will also impress the judges!
 
 ## How to Play
 
-Download https://github.com/AmbiguousError/WharfManu/blob/main/dist/WharfManu.exe
+Download `https://github.com/AmbiguousError/WharfManu/blob/main/dist/WharfManu.exe`
 The game is all about timing your jump and controlling your diver in the air.
 
 ### Controls:
@@ -12,7 +12,7 @@ The game is all about timing your jump and controlling your diver in the air.
 * **Space Bar:**
     * Press once when the diver is on the platform to start the jump timing bar.
     * Press again to jump. The accuracy of this press determines your jump power.
-    * Press to advance to the next dive or restart the competition after it ends.
+    * Press to advance to the next **manu** or restart the competition after it ends.
 * **Left/Right Arrow Keys:** Control the diver's rotation (somersaults) while in the air.
 * **Up/Down Arrow Keys:** Control the diver's pike or tuck position while in the air.
 
@@ -26,14 +26,14 @@ The game is all about timing your jump and controlling your diver in the air.
 3.  **Diving:**
     * Once in the air, use the **LEFT and RIGHT ARROW KEYS** to make your diver rotate and perform somersaults.
     * Use the **UP and DOWN ARROW KEYS** to adjust your diver's pike (how much they are bent at the hips).
-4.  **Entry:** The angle and form of your diver as they enter the water determine your score. A clean, vertical entry with minimal splash (a small "entry width") is best.
+4.  **Entry:** The angle and form of your diver as they enter the water determine your score. A dramatic, horizontal entry with **maximum splash (a large "entry width") is best!**
 5.  **Scoring:**
-    * You get scores from 5 judges for each dive. The highest and lowest scores are dropped, and the remaining three are summed up.
-    * The main factor for your score is the "entry width" – a smaller width (less splash) means a higher score.
+    * You get scores from 5 judges for each **manu**. The highest and lowest scores are dropped, and the remaining three are summed up.
+    * The main factor for your score is the "entry width" – **a larger width (more splash) means a higher score!**
     * The number of somersaults completed is also displayed.
 6.  **Competition:**
     * You have 3 attempts per competition.
-    * Your total score for the competition is the sum of your scores from the 3 dives.
+    * Your total score for the competition is the sum of your scores from the 3 **manus**.
     * After the competition, your total score will be displayed, and you'll see if you made it onto the high scores list!
 
 ## Installation
@@ -48,4 +48,4 @@ To play WharfManu, you will need the executable file (`WharfManu.exe` - typicall
 1.  Navigate to the folder where you placed `WharfManu.exe`.
 2.  Double-click on `WharfManu.exe` to start the game.
 
-Enjoy the game and aim for that perfect manu!
+Enjoy the game and aim for that massive manu!
